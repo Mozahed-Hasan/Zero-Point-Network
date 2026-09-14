@@ -78,13 +78,13 @@ export default function Packages() {
             className={`pkg-tab ${activeTab === 'family' ? 'active' : ''}`}
             onClick={() => setActiveTab('family')}
           >
-            👨‍👩‍👧‍👦 Family Package
+            Family Package
           </button>
           <button 
             className={`pkg-tab ${activeTab === 'premium' ? 'active' : ''}`}
             onClick={() => setActiveTab('premium')}
           >
-            👑 Premium Package
+            Premium Package
           </button>
         </div>
 

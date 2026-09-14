@@ -75,8 +75,8 @@ export const coverageAreas: Area[] = [
 ];
 
 export const contactInfo = {
-  phone1:   "01849663758",
-  phone2:   "01790990625",
+  phone1:   "01841663718",
+  phone2:   "01790110625",
   facebook: "https://www.facebook.com/profile.php?id=100063848813839",
   maps:     "https://maps.app.goo.gl/65iJ7SuXr3GaqyQs6",
   address:  "1087, Khilbarirtek, Vatara, Dhaka-1212",

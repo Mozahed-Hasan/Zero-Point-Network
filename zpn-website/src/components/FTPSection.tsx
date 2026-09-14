@@ -32,8 +32,13 @@ export default function FTPSection() {
         </div>
 
         <div className="ftp-info-bar">
-          {[["⚡","লোকাল স্পিডে ডাউনলোড"],["♾️","আনলিমিটেড ডাউনলোড"],["🆓","সম্পূর্ণ বিনামূল্যে"],["🔐","শুধু ZPN গ্রাহকদের জন্য"]].map(([icon,text]) => (
-            <div key={text} className="ftp-info-bar-item"><span>{icon}</span> {text}</div>
+          {[
+            [<svg key="zap" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>, "লোকাল স্পিডে ডাউনলোড"],
+            [<svg key="infinite" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18.178 8c5.096 0 5.096 8 0 8-5.095 0-7.133-8-12.739-8-4.585 0-4.585 8 0 8 5.606 0 7.644-8 12.74-8z"/></svg>, "আনলিমিটেড ডাউনলোড"],
+            [<svg key="gift" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>, "সম্পূর্ণ বিনামূল্যে"],
+            [<svg key="lock" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>, "শুধু ZPN গ্রাহকদের জন্য"],
+          ].map(([icon, text]) => (
+            <div key={String(text)} className="ftp-info-bar-item"><span>{icon}</span> {text}</div>
           ))}
         </div>
 
