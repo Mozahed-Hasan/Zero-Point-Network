@@ -67,8 +67,10 @@ export const coverageAreas: Area[] = [
   { id:"khilbari", name:"খিলবাড়িটেক",      active:true },
   { id:"nurer",    name:"নূরেরচালা",         active:true },
   { id:"bou",      name:"বউবাজার",           active:true },
-  { id:"shah",     name:"শাহজাদপুর",      active:true },
-  { id:"vatara",   name:"ভাটারা মূল এলাকা", active:true },
+  { id:"shah",     name:"শাহজাহাদপুর",       active:true },
+  { id:"vatara",   name:"বাঁশতলা",            active:true },
+  { id:"jblock",   name:"জে-ব্লক",           active:true },
+  { id:"abdullah", name:"আব্দুল্লাহবাগ",    active:true },
   { id:"more",     name:"আরও এলাকা শীঘ্রই...",active:false },
 ];
 

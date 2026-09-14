@@ -1,4 +1,4 @@
-﻿import Image from "next/image";
+import Image from "next/image";
 
 export default function Hero() {
   return (
@@ -24,7 +24,7 @@ export default function Hero() {
           </div>
           <div className="hero-stats">
             <div className="stat-item">
-              <span className="stat-num">৩০০+</span>
+              <span className="stat-num">১০০০+</span>
               <span className="stat-label">সক্রিয় সংযোগ</span>
             </div>
             <div className="stat-divider" />

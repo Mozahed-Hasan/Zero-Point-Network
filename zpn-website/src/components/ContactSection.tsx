@@ -49,36 +49,27 @@ export default function ContactSection() {
           <p className="section-sub">নতুন সংযোগ নিতে বা যেকোনো সমস্যায় আমাদের সাথে যোগাযোগ করুন</p>
         </div>
 
-        <div className="contact-grid">
-          <div className="contact-card" id="contact-phone">
-            <span className="contact-icon">📱</span>
-            <h3>ফোন নম্বর</h3>
-            <a href={`tel:${contactInfo.phone1}`} className="contact-link">
-              {contactInfo.phone1.replace(/(\d{5})(\d{6})/, "$1-$2")}
-            </a>
-            <a href={`tel:${contactInfo.phone2}`} className="contact-link" style={{ display: 'block', marginTop: '5px' }}>
-              {contactInfo.phone2.replace(/(\d{5})(\d{6})/, "$1-$2")}
-            </a>
-            <p style={{ marginTop: '10px' }}>সকাল ৮টা – রাত ১০টা</p>
-          </div>
-          <div className="contact-card" id="contact-location">
-            <span className="contact-icon">📍</span>
-            <h3>আমাদের ঠিকানা</h3>
-            <p className="contact-addr">{contactInfo.address}</p>
-            <a href={contactInfo.maps} target="_blank" rel="noopener noreferrer"
-              className="btn btn-outline-sm" id="contact-map-btn" style={{ marginTop: "10px" }}>
-              🗺️ Google Maps →
-            </a>
-          </div>
-          <div className="contact-card" id="contact-support">
-            <span className="contact-icon">🎧</span>
-            <h3>অনলাইন সাপোর্ট</h3>
-            <p>আমাদের Facebook পেজে মেসেজ করুন</p>
-            <a href={contactInfo.facebook} target="_blank" rel="noopener noreferrer"
-              className="btn btn-outline-sm" id="contact-fb-btn">
-              📘 Facebook →
-            </a>
-          </div>
+        <div className="contact-links-grid">
+          <a href={`https://wa.me/88${contactInfo.phone1}`} target="_blank" rel="noopener noreferrer" className="contact-link-card">
+            <span className="clc-icon">💬</span>
+            <span className="clc-text">Text 'Hi' to {contactInfo.phone1.replace(/(\d{5})(\d{6})/, "$1-$2")}</span>
+            <span className="clc-arrow">›</span>
+          </a>
+          <a href={`tel:${contactInfo.phone2}`} className="contact-link-card">
+            <span className="clc-icon">📞</span>
+            <span className="clc-text">Call {contactInfo.phone2.replace(/(\d{5})(\d{6})/, "$1-$2")}</span>
+            <span className="clc-arrow">›</span>
+          </a>
+          <a href={contactInfo.facebook} target="_blank" rel="noopener noreferrer" className="contact-link-card">
+            <span className="clc-icon">📘</span>
+            <span className="clc-text">Message us in Facebook</span>
+            <span className="clc-arrow">›</span>
+          </a>
+          <a href={contactInfo.maps} target="_blank" rel="noopener noreferrer" className="contact-link-card">
+            <span className="clc-icon">📍</span>
+            <span className="clc-text">Find us on Google Maps</span>
+            <span className="clc-arrow">›</span>
+          </a>
         </div>
 
         <div className="contact-form-wrap">

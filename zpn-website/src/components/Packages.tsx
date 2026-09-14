@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import { packages } from "@/lib/data";
 import type { Package } from "@/lib/data";
 import Image from "next/image";
@@ -5,35 +8,55 @@ import Image from "next/image";
 function PackageCard({ pkg }: { pkg: Package }) {
   return (
     <div
-      className={`pkg-card${pkg.popular ? " popular" : ""}${pkg.best ? " premium-card king-card" : ""}`}
+      className={`pkg-card new-design${pkg.popular ? " popular" : ""}${pkg.best ? " king-card" : ""}`}
       id={`pkg-${pkg.id}`}
+      style={pkg.best ? { backgroundColor: pkg.color, color: "#fff" } : undefined}
     >
-      {pkg.popular && <div className="popular-badge">⭐ জনপ্রিয়</div>}
-      {pkg.best && <div className="popular-badge king-badge">👑 সেরা</div>}
-      <div className="pkg-header" style={{ "--pkg-color": pkg.color } as React.CSSProperties}>
-        <span className="pkg-emoji">{pkg.emoji}</span>
-        <span className="pkg-name">{pkg.name}</span>
+      <div className="pkg-name" style={{ color: pkg.best ? "#fff" : pkg.color }}>
+        {pkg.name}
       </div>
-      <div className="pkg-speed">{pkg.speed} <span>Mbps</span></div>
-      <div className="pkg-price">৳{pkg.price.toLocaleString("bn-BD")}<span>/মাস</span></div>
-      <ul className="pkg-features">
-        <li>✅ নিরবচ্ছিন্ন সংযোগ</li>
-        <li>✅ ২৪/৭ সাপোর্ট</li>
-        <li>✅ সুপার ডাউন স্পিড</li>
-        <li>✅ সংযোগ চার্জ ফ্রি</li>
+      
+      <div className="pkg-speed-wrap" style={{ color: pkg.best ? "#fff" : pkg.color }}>
+        <span className="pkg-speed-num">{pkg.speed}</span>
+        <span className="pkg-speed-unit">Mbps</span>
+      </div>
+      
+      <div className="pkg-traffic">UNLIMITED TRAFFIC</div>
+      
+      <ul className="pkg-features-list">
+        <li>Buffer-Free Facebook</li>
+        <li>4K YouTube Stream</li>
+        <li>Superfast BDIX Speed</li>
+        <li>Optical Fiber Connection</li>
+        <li>IPv6 Public IP Only</li>
+        <li>24/7 Phone Support</li>
       </ul>
+      
+      <div className="pkg-divider" />
+      
+      <div className="pkg-price-new">
+        {pkg.price.toLocaleString("en-US")} Tk/mo
+      </div>
+      
+      <div className="pkg-subtext">
+        Installation Charge: Free
+      </div>
+      
       <a
         href="#contact"
-        className={`btn btn-pkg${pkg.popular ? " popular-btn" : ""}${pkg.best ? " king-btn" : ""}`}
+        className={`btn btn-block ${pkg.best ? "btn-light" : "btn-dark"}`}
+        style={!pkg.best ? { backgroundColor: pkg.color, color: "#fff" } : undefined}
         id={`buy-${pkg.id}`}
       >
-        এখনই নিন
+        Get Now
       </a>
     </div>
   );
 }
 
 export default function Packages() {
+  const [activeTab, setActiveTab] = useState<"all" | "family" | "premium">("all");
+
   return (
     <section className="section packages-section" id="packages">
       <div className="container">
@@ -44,23 +67,50 @@ export default function Packages() {
           </p>
         </div>
 
-        <div className="pkg-category">
-          <h3 className="pkg-cat-title">
-            <span className="cat-badge personal">👨‍👩‍👧‍👦 Family Package</span>
-          </h3>
-          <div className="packages-grid family-grid">
-            {packages.personal.map((pkg) => <PackageCard key={pkg.id} pkg={pkg} />)}
-          </div>
+        <div className="pkg-tabs">
+          <button 
+            className={`pkg-tab ${activeTab === 'all' ? 'active' : ''}`}
+            onClick={() => setActiveTab('all')}
+          >
+            All Packages
+          </button>
+          <button 
+            className={`pkg-tab ${activeTab === 'family' ? 'active' : ''}`}
+            onClick={() => setActiveTab('family')}
+          >
+            👨‍👩‍👧‍👦 Family Package
+          </button>
+          <button 
+            className={`pkg-tab ${activeTab === 'premium' ? 'active' : ''}`}
+            onClick={() => setActiveTab('premium')}
+          >
+            👑 Premium Package
+          </button>
         </div>
 
-        <div className="pkg-category">
-          <h3 className="pkg-cat-title">
-            <span className="cat-badge premium">👑 প্রিমিয়াম প্যাকেজ</span>
-          </h3>
-          <div className="packages-grid premium-grid">
-            {packages.premium.map((pkg) => <PackageCard key={pkg.id} pkg={pkg} />)}
+        {activeTab === 'all' && (
+          <div className="pkg-category">
+            <div className="packages-grid family-grid">
+              {[...packages.personal, ...packages.premium].map((pkg) => <PackageCard key={pkg.id} pkg={pkg} />)}
+            </div>
           </div>
-        </div>
+        )}
+
+        {activeTab === 'family' && (
+          <div className="pkg-category">
+            <div className="packages-grid family-grid">
+              {packages.personal.map((pkg) => <PackageCard key={pkg.id} pkg={pkg} />)}
+            </div>
+          </div>
+        )}
+
+        {activeTab === 'premium' && (
+          <div className="pkg-category">
+            <div className="packages-grid premium-grid">
+              {packages.premium.map((pkg) => <PackageCard key={pkg.id} pkg={pkg} />)}
+            </div>
+          </div>
+        )}
 
         <div className="pkg-note">
           <div className="gaming-support-banner">

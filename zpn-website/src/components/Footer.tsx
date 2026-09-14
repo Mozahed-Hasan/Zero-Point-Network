@@ -6,9 +6,8 @@ export default function Footer() {
     <footer className="footer" id="footer">
       <div className="container footer-inner">
         <div className="footer-brand">
-          <Image src="/Main logo.png" alt="Zero Point Network" width={200} height={80} className="footer-logo" />
+          <Image src="/Main logo.png" alt="Zero Point Network" width={250} height={100} className="footer-logo" />
           <p className="footer-tagline">ভাটারার সেরা ইন্টারনেট সেবা</p>
-          <p className="footer-btrc">✅ BTRC অনুমোদিত নির্ভরযোগ্য প্রতিষ্ঠান</p>
           <div className="footer-socials">
             <a href={contactInfo.facebook} target="_blank" rel="noopener noreferrer" id="footer-fb" className="social-link">📘 Facebook</a>
             <a href={contactInfo.maps}     target="_blank" rel="noopener noreferrer" id="footer-map" className="social-link">🗺️ Maps</a>
