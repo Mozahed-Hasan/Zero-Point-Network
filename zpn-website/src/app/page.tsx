@@ -14,9 +14,6 @@ const services = [
   { icon:"💼", title:"কর্পোরেট প্ল্যান",  desc:"ব্যবসা প্রতিষ্ঠানের জন্য ডেডিকেটেড সংযোগ" },
   { icon:"📡", title:"অপটিক্যাল ফাইবার", desc:"সর্বাধুনিক ফাইবার অপটিক নেটওয়ার্ক পরিকাঠামো" },
 ];
-
-import PaymentSection from "@/components/PaymentSection";
-
 export default function Home() {
   return (
     <>
@@ -40,7 +37,6 @@ export default function Home() {
       <Coverage />
       <FTPSection />
       <About />
-      <PaymentSection />
       <ContactSection />
       <Footer />
 

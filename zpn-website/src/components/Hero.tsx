@@ -62,15 +62,25 @@ export default function Hero() {
         <div className="hero-visual">
           <div className="hero-slider" ref={emblaRef}>
             <div className="slider-track">
-              {/* Add your poster images here */}
               <div className="slide-card">
-                <div className="slide-placeholder" style={{pointerEvents: 'none'}}>Poster 1</div>
+                <div className="slide-image-container" style={{ position: 'relative', width: '100%', height: '100%', borderRadius: '12px', overflow: 'hidden' }}>
+                  <Image src="/poster1.png" alt="Poster 1" fill style={{ objectFit: 'cover' }} sizes="(max-width: 800px) 100vw, 800px" priority />
+                </div>
               </div>
               <div className="slide-card">
-                <div className="slide-placeholder" style={{pointerEvents: 'none'}}>Poster 2</div>
+                <div className="slide-image-container" style={{ position: 'relative', width: '100%', height: '100%', borderRadius: '12px', overflow: 'hidden' }}>
+                  <Image src="/poster3.png" alt="Poster 3" fill style={{ objectFit: 'cover' }} sizes="(max-width: 800px) 100vw, 800px" />
+                </div>
               </div>
               <div className="slide-card">
-                <div className="slide-placeholder" style={{pointerEvents: 'none'}}>Poster 3</div>
+                <div className="slide-image-container" style={{ position: 'relative', width: '100%', height: '100%', borderRadius: '12px', overflow: 'hidden' }}>
+                  <Image src="/poster2.png" alt="Poster 2" fill style={{ objectFit: 'cover' }} sizes="(max-width: 800px) 100vw, 800px" />
+                </div>
+              </div>
+              <div className="slide-card">
+                <div className="slide-image-container" style={{ position: 'relative', width: '100%', height: '100%', borderRadius: '12px', overflow: 'hidden' }}>
+                  <Image src="/poster4.png" alt="Poster 4" fill style={{ objectFit: 'cover' }} sizes="(max-width: 800px) 100vw, 800px" />
+                </div>
               </div>
             </div>
           </div>

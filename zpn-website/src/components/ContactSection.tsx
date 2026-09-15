@@ -9,9 +9,12 @@ interface FormData {
 }
 
 export default function ContactSection() {
+  const [formType, setFormType] = useState<"connection"|"complaint">("connection");
   const [form, setForm]       = useState<FormData>({ fullName:"", phone:"", area:"", packageName:"", message:"" });
   const [status, setStatus]   = useState<"idle"|"loading"|"success"|"error">("idle");
   const [msg, setMsg]         = useState("");
+
+  const isComplaint = formType === "complaint";
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement|HTMLSelectElement|HTMLTextAreaElement>) =>
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -20,10 +23,11 @@ export default function ContactSection() {
     e.preventDefault();
     setStatus("loading");
     try {
+      const payload = { ...form, type: formType };
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify(payload),
       });
       const data = await res.json();
       if (data.success) {
@@ -82,8 +86,23 @@ export default function ContactSection() {
         </div>
 
         <div className="contact-form-wrap">
-          <h3 className="form-title">নতুন সংযোগের আবেদন করুন</h3>
-
+          <div className="form-toggle-group">
+            <button
+              type="button"
+              className={`form-toggle-btn ${formType === "connection" ? "active" : ""}`}
+              onClick={() => setFormType("connection")}
+            >
+              নতুন সংযোগ
+            </button>
+            <button
+              type="button"
+              className={`form-toggle-btn ${formType === "complaint" ? "active" : ""}`}
+              onClick={() => setFormType("complaint")}
+            >
+              অভিযোগ
+            </button>
+          </div>
+          <h3 className="form-title">{formType === "connection" ? "নতুন সংযোগের আবেদন করুন" : "অভিযোগ করুন"}</h3>
           {status === "success" && (
             <div className="form-alert success">✅ {msg}</div>
           )}
@@ -94,14 +113,14 @@ export default function ContactSection() {
           <form className="contact-form" id="contactForm" onSubmit={handleSubmit}>
             <div className="form-row">
               <div className="form-group">
-                <label htmlFor="fullName">পূর্ণ নাম *</label>
+                <label htmlFor="fullName">পূর্ণ নাম {isComplaint ? "" : "*"}</label>
                 <input type="text" id="fullName" name="fullName" value={form.fullName}
-                  onChange={handleChange} placeholder="আপনার নাম লিখুন" required />
+                  onChange={handleChange} placeholder="আপনার নাম লিখুন" required={!isComplaint} />
               </div>
               <div className="form-group">
-                <label htmlFor="phone">মোবাইল নম্বর *</label>
+                <label htmlFor="phone">মোবাইল নম্বর {isComplaint ? "" : "*"}</label>
                 <input type="tel" id="phone" name="phone" value={form.phone}
-                  onChange={handleChange} placeholder="01XXXXXXXXX" required />
+                  onChange={handleChange} placeholder="01XXXXXXXXX" required={!isComplaint} />
               </div>
             </div>
             <div className="form-row">
@@ -115,14 +134,26 @@ export default function ContactSection() {
                 </select>
               </div>
               <div className="form-group">
-                <label htmlFor="packageName">পছন্দের প্যাকেজ</label>
-                <select id="packageName" name="packageName" value={form.packageName} onChange={handleChange}>
-                  <option value="">প্যাকেজ নির্বাচন করুন</option>
-                  {allPkgs.map((p) => (
-                    <option key={p.id} value={p.id}>
-                      {p.name} – ৳{p.price}/মাস ({p.speed} Mbps)
-                    </option>
-                  ))}
+                <label htmlFor="packageName">{isComplaint ? "অভিযোগের ধরন *" : "পছন্দের প্যাকেজ"}</label>
+                <select id="packageName" name="packageName" value={form.packageName} onChange={handleChange} required={isComplaint}>
+                  {isComplaint ? (
+                    <>
+                      <option value="">অভিযোগের ধরন নির্বাচন করুন</option>
+                      <option value="সংযোগ নিয়ে অভিযোগ">সংযোগ নিয়ে অভিযোগ</option>
+                      <option value="স্টাফদের নিয়ে অভিযোগ">স্টাফদের নিয়ে অভিযোগ</option>
+                      <option value="সার্ভিস নিয়ে অভিযোগ">সার্ভিস নিয়ে অভিযোগ</option>
+                      <option value="অন্যান্য (নিচে বিস্তারিত লিখুন)">অন্যান্য (নিচে বিস্তারিত লিখুন)</option>
+                    </>
+                  ) : (
+                    <>
+                      <option value="">প্যাকেজ নির্বাচন করুন</option>
+                      {allPkgs.map((p) => (
+                        <option key={p.id} value={p.id}>
+                          {p.name} – ৳{p.price}/মাস ({p.speed} Mbps)
+                        </option>
+                      ))}
+                    </>
+                  )}
                 </select>
               </div>
             </div>
@@ -137,7 +168,7 @@ export default function ContactSection() {
               id="form-submit-btn"
               disabled={status === "loading"}
             >
-              {status === "loading" ? "⏳ পাঠানো হচ্ছে..." : "📨 আবেদন পাঠান"}
+              {status === "loading" ? "⏳ পাঠানো হচ্ছে..." : formType === "connection" ? "📨 আবেদন পাঠান" : "📨 অভিযোগ পাঠান"}
             </button>
           </form>
         </div>

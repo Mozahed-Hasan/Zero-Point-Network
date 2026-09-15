@@ -1,6 +1,9 @@
-﻿// src/app/api/contact/route.ts  –  Backend API route for contact form
+// src/app/api/contact/route.ts  –  Backend API route for contact form
 
 import { NextRequest, NextResponse } from "next/server";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 export interface ContactFormData {
   fullName: string;
@@ -13,33 +16,52 @@ export interface ContactFormData {
 export async function POST(req: NextRequest) {
   try {
     const body: ContactFormData = await req.json();
-    const { fullName, phone, area } = body;
+    const { fullName, phone, area, type } = body as any;
 
-    // Validate required fields
-    if (!fullName || !phone || !area) {
-      return NextResponse.json(
-        { success: false, message: "নাম, ফোন নম্বর ও এলাকা আবশ্যক।" },
-        { status: 400 }
-      );
+    const isComplaint = type === "complaint";
+
+    // Validate required fields based on type
+    if (isComplaint) {
+      if (!area) {
+        return NextResponse.json(
+          { success: false, message: "এলাকা নির্বাচন আবশ্যক।" },
+          { status: 400 }
+        );
+      }
+    } else {
+      if (!fullName || !phone || !area) {
+        return NextResponse.json(
+          { success: false, message: "নাম, ফোন নম্বর ও এলাকা আবশ্যক।" },
+          { status: 400 }
+        );
+      }
+
+      if (!/^01[3-9]\d{8}$/.test(phone)) {
+        return NextResponse.json(
+          { success: false, message: "সঠিক বাংলাদেশি মোবাইল নম্বর দিন।" },
+          { status: 400 }
+        );
+      }
     }
 
-    if (!/^01[3-9]\d{8}$/.test(phone)) {
-      return NextResponse.json(
-        { success: false, message: "সঠিক বাংলাদেশি মোবাইল নম্বর দিন।" },
-        { status: 400 }
-      );
-    }
-
-    // Log submission (in production, save to DB or send email/WhatsApp)
-    console.log("=== New ZPN Connection Request ===");
-    console.log(JSON.stringify(body, null, 2));
-    console.log("Timestamp:", new Date().toISOString());
+    // Save to DB
+    await prisma.contactSubmission.create({
+      data: {
+        type: isComplaint ? "complaint" : "connection",
+        fullName: fullName || null,
+        phone: phone || null,
+        area,
+        package: body.packageName || null,
+        message: body.message || null,
+      }
+    });
 
     return NextResponse.json({
       success: true,
       message: "আপনার আবেদন সফলভাবে গৃহীত হয়েছে! আমরা শীঘ্রই যোগাযোগ করব।",
     });
-  } catch {
+  } catch (error) {
+    console.error("Database error:", error);
     return NextResponse.json(
       { success: false, message: "সার্ভার ত্রুটি। আবার চেষ্টা করুন।" },
       { status: 500 }

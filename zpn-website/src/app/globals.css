@@ -248,10 +248,10 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-sans); letter-spacing: -0.02em;
 .hero-visual { display: flex; flex-direction: column; align-items: center; width: 100%; }
 .hero-slider {
   width: 100%;
-  max-width: 800px;
-  background: var(--white);
+  max-width: 950px;
+  background: transparent;
   border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0,0,0,.08);
+  box-shadow: 0 15px 40px rgba(0,0,0,.15);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -263,7 +263,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-sans); letter-spacing: -0.02em;
   flex: 0 0 100%;
   min-width: 0;
   aspect-ratio: 1/1;
-  padding: 4px;
+  padding: 0;
 }
 .slide-placeholder {
   width: 100%;
@@ -663,8 +663,9 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-sans); letter-spacing: -0.02em;
 .form-submit { margin-top: 8px; width: 100%; justify-content: center; font-size: 1.1rem; }
 
 /* ============================================
-   FOOTER
+   Footer
    ============================================ */
+.mobile-footer-view { display: none !important; }
 .footer { background: var(--gray-900); color: var(--gray-300); padding-top: 64px; font-family: var(--font-noto); }
 .footer-inner {
   display: grid;
@@ -712,8 +713,6 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-sans); letter-spacing: -0.02em;
   align-items: center;
   font-size: 0.95rem;
   color: var(--gray-500);
-  flex-wrap: wrap;
-  gap: 8px;
 }
 
 /* ============================================
@@ -770,6 +769,13 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-sans); letter-spacing: -0.02em;
 }
 @media (max-width: 768px) {
   html { font-size: 14px; }
+  .footer-bottom-inner { flex-direction: column; text-align: center; gap: 8px; }
+  .desktop-footer-view { display: none !important; }
+  .mobile-footer-view { display: flex !important; }
+  .nav-inner { justify-content: space-between; gap: 0; }
+  .logo-img { height: 35px; }
+  .nav-call-text { display: none; }
+  #nav-call-btn { padding: 10px; }
   .nav-links { display: none; flex-direction: column; position: fixed; top: 90px; left: 0; right: 0; background: var(--white); padding: 20px 24px; border-bottom: 1px solid var(--gray-200); box-shadow: var(--shadow); z-index: 9999; gap: 4px; }
   .nav-links.open { display: flex !important; }
   .hamburger { display: flex; position: relative; z-index: 10000; }
@@ -783,8 +789,11 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-sans); letter-spacing: -0.02em;
   .footer-links-col a, .footer-links-col span { font-size: 0.8rem; }
   .coverage-wrapper { grid-template-columns: 1fr; align-items: stretch; gap: 20px; }
   .ftp-grid { grid-template-columns: 1fr; }
-  .ftp-info-bar { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; background: transparent; border: none; padding: 0; margin-bottom: 20px; flex-direction: unset; }
-  .ftp-info-bar-item { background: var(--white); border: 2px solid var(--gray-200); border-radius: 8px; font-size: 0.75rem; padding: 10px 6px; border-right: 2px solid var(--gray-200) !important; border-bottom: 2px solid var(--gray-200) !important; }
+  .ftp-info-bar { grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 20px; }
+  .ftp-info-bar-item { border-radius: 10px; font-size: 0.7rem; padding: 12px 6px; gap: 8px; }
+  .ftp-info-bar-item span { width: 36px; height: 36px; border-radius: 10px; }
+  .ftp-info-bar-item:last-child { padding: 12px; }
+  .ftp-info-bar-item:last-child span { width: 32px; height: 32px; }
   .about-features { grid-template-columns: 1fr; }
   .form-row { grid-template-columns: 1fr; }
   .game-logo { width: 60px; height: auto; max-width: 100%; }
@@ -793,38 +802,70 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-sans); letter-spacing: -0.02em;
 @media (max-width: 480px) {
   .section { padding: 64px 0; }
   .areas-grid { grid-template-columns: 1fr; }
-  .hero-actions { flex-direction: column; width: 100%; }
+  .hero-actions { flex-direction: row; width: 100%; gap: 10px; }
+  .hero-actions .btn { flex: 1; justify-content: center; text-align: center; font-size: 0.9rem; padding: 12px 10px; white-space: nowrap; }
   .contact-form-wrap { padding: 24px 20px; }
   .hero-stats { justify-content: center; }
+  .feature-tags { flex-wrap: nowrap; justify-content: center; gap: 4px; overflow-x: auto; padding-bottom: 4px; }
+  .ftag { padding: 4px 6px; font-size: 0.65rem; gap: 4px; white-space: nowrap; line-height: 1; display: inline-flex; align-items: center; justify-content: center; }
+  .ftag svg { width: 12px; height: 12px; display: block; flex-shrink: 0; }
+  .pkg-tabs { flex-wrap: nowrap; gap: 6px; overflow-x: auto; justify-content: space-between; padding-bottom: 4px; }
+  .pkg-tab { padding: 8px 10px; font-size: 0.75rem; white-space: nowrap; flex: 1; text-align: center; }
+  .coverage-cta-box { flex-wrap: nowrap; padding: 12px 14px; gap: 10px; }
+  .coverage-cta-box p { min-width: 0; font-size: 0.85rem; }
+  #coverage-call-btn { padding: 10px 14px; font-size: 0.85rem; white-space: nowrap; flex-shrink: 0; }
 }
 
 /* ============================================
    FTP TABS & LINK CARDS (New)
    ============================================ */
 .ftp-info-bar {
-  display: flex;
-  gap: 0;
-  background: var(--white);
-  border: 2px solid var(--gray-200);
-  border-radius: var(--radius);
-  overflow: hidden;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
   margin-bottom: 28px;
 }
 .ftp-info-bar-item {
-  flex: 1;
-  padding: 14px 16px;
+  background: var(--white);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 14px;
+  padding: 20px 16px;
   text-align: center;
-  font-size: 0.88rem;
-  font-weight: 600;
-  color: var(--gray-700);
-  border-right: 1px solid var(--gray-200);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--gray-800);
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+  transition: all 0.3s ease;
 }
-.ftp-info-bar-item:last-child { border-right: none; }
-.ftp-info-bar-item span { font-size: 1.1rem; }
+.ftp-info-bar-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.06);
+  border-color: rgba(220, 38, 38, 0.2);
+}
+.ftp-info-bar-item:last-child { 
+  grid-column: 1 / -1; 
+  flex-direction: row; 
+  padding: 16px;
+}
+.ftp-info-bar-item span { 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  width: 46px; 
+  height: 46px; 
+  background: linear-gradient(135deg, rgba(220, 38, 38, 0.08), rgba(220, 38, 38, 0.02)); 
+  color: var(--red); 
+  border-radius: 12px; 
+}
+.ftp-info-bar-item:last-child span {
+  width: 40px;
+  height: 40px;
+}
 
 /* Tabs */
 .ftp-tabs {
@@ -1112,3 +1153,59 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-sans); letter-spacing: -0.02em;
 
 .ssl-banner { text-align: center; font-size: 1.1rem; color: var(--gray-600); }
 .ssl-banner strong { color: #111; }
+
+/* ============================================
+   Form Toggle Switch
+   ============================================ */
+.form-toggle-group {
+  display: flex;
+  background: var(--gray-100);
+  padding: 4px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+  gap: 4px;
+}
+.form-toggle-btn {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  background: transparent;
+  font-family: var(--font-noto);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--gray-600);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.form-toggle-btn.active {
+  background: var(--white);
+  color: var(--gray-900);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+/* ============================================
+   Admin Panel
+   ============================================ */
+.admin-login-container {
+  display: flex; justify-content: center; align-items: center; min-height: 80vh; background: #fdfdfd; padding-top: 80px;
+}
+.admin-login-form {
+  background: #fff; padding: 40px; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); width: 100%; max-width: 400px; text-align: center;
+}
+.admin-login-form h2 { margin-bottom: 10px; color: var(--gray-900); }
+.admin-login-form p { color: var(--gray-500); margin-bottom: 24px; font-size: 0.9rem; }
+.admin-login-form input {
+  width: 100%; padding: 12px 16px; border: 1px solid var(--gray-200); border-radius: 8px; margin-bottom: 16px; font-size: 1rem;
+}
+.admin-login-form button { width: 100%; }
+.error-text { color: var(--red); font-size: 0.9rem; margin-bottom: 16px; font-weight: 500; }
+
+.admin-title { font-size: 2rem; color: var(--gray-900); margin-bottom: 40px; text-align: center; font-weight: 800; }
+.admin-section h2 { font-size: 1.4rem; color: var(--gray-800); margin-bottom: 20px; font-weight: 700; }
+.table-responsive { overflow-x: auto; background: #fff; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+.admin-table { width: 100%; border-collapse: collapse; min-width: 800px; }
+.admin-table th, .admin-table td { padding: 16px 20px; text-align: left; border-bottom: 1px solid var(--gray-100); font-size: 0.95rem; }
+.admin-table th { background: var(--gray-50); color: var(--gray-600); font-weight: 600; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.05em; }
+.admin-table tbody tr:hover { background: #fafafa; }
+.admin-table td { color: var(--gray-700); }
