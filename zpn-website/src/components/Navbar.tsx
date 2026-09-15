@@ -42,7 +42,11 @@ export default function Navbar() {
           <span /><span /><span />
         </button>
 
-        <Link href="#home" className="logo-link" onClick={() => setMenuOpen(false)}>
+        <Link href="#home" className="logo-link" onClick={(e) => {
+          e.preventDefault();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          setMenuOpen(false);
+        }}>
           <Image src="/Main logo.png" alt="Zero Point Network" width={180} height={70} className="logo-img" priority />
         </Link>
 
