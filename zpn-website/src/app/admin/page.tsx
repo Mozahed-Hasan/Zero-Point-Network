@@ -1,10 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export default function AdminPage() {
+  const router = useRouter();
   const [password, setPassword] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [submissions, setSubmissions] = useState<any[]>([]);
@@ -33,6 +35,13 @@ export default function AdminPage() {
       setError("নেটওয়ার্ক ত্রুটি");
     }
     setLoading(false);
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setPassword("");
+    setSubmissions([]);
+    router.push("/");
   };
 
   if (!isLoggedIn) {
@@ -67,7 +76,10 @@ export default function AdminPage() {
     <>
       <Navbar />
       <div className="admin-dashboard container" style={{paddingTop: "120px", paddingBottom: "80px", minHeight: "80vh"}}>
-        <h1 className="admin-title">ZPN এডমিন ড্যাশবোর্ড</h1>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '40px' }}>
+          <h1 className="admin-title" style={{ marginBottom: 0 }}>এডমিন ড্যাশবোর্ড</h1>
+          <button onClick={handleLogout} className="btn btn-primary" style={{ backgroundColor: '#DC2626', borderColor: '#DC2626' }}>লগ আউট</button>
+        </div>
         
         <div className="admin-section">
           <h2>নতুন সংযোগের আবেদন ({connectionReqs.length})</h2>

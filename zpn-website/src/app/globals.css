@@ -576,6 +576,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-sans); letter-spacing: -0.02em;
 .network-node.n3 { bottom: 0; left: 50%; transform: translateX(-50%); }
 .network-center {
   position: absolute;
+  z-index: 10;
   width: 130px; height: 72px;
   background: #ffffff;
   border-radius: 12px;
@@ -778,6 +779,9 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-sans); letter-spacing: -0.02em;
   #nav-call-btn { padding: 10px; }
   .nav-links { display: none; flex-direction: column; position: fixed; top: 90px; left: 0; right: 0; background: var(--white); padding: 20px 24px; border-bottom: 1px solid var(--gray-200); box-shadow: var(--shadow); z-index: 9999; gap: 4px; }
   .nav-links.open { display: flex !important; }
+  .nav-dropdown-content, .nav-sub-dropdown { position: static; box-shadow: none; border: none; width: 100%; min-width: 100%; border-radius: 8px; }
+  .nav-dropdown-content { background: var(--gray-50); margin-top: 5px; }
+  .nav-sub-dropdown { background: transparent; padding-left: 15px; margin-top: 5px; }
   .hamburger { display: flex; position: relative; z-index: 10000; }
   .services-grid, .packages-grid, .packages-grid.family-grid, .packages-grid.premium-grid { grid-template-columns: 1fr 1fr; }
   .contact-links-grid { grid-template-columns: 1fr; }
