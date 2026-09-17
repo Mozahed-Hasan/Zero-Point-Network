@@ -6,6 +6,8 @@ import type { Package } from "@/lib/data";
 import Image from "next/image";
 
 function PackageCard({ pkg }: { pkg: Package }) {
+  const isPremium = packages.premium.some(p => p.id === pkg.id);
+  const has4K = !['bachelor', 'bhai', 'friends'].includes(pkg.id);
   return (
     <div
       className={`pkg-card new-design${pkg.popular ? " popular" : ""}${pkg.best ? " king-card" : ""}`}
@@ -25,10 +27,10 @@ function PackageCard({ pkg }: { pkg: Package }) {
       
       <ul className="pkg-features-list">
         <li>Buffer-Free Facebook</li>
-        <li>4K YouTube Stream</li>
-        <li>Superfast BDIX Speed</li>
+        {has4K && <li>4K YouTube Stream</li>}
+        {isPremium && <li>Superfast BDIX Speed</li>}
         <li>Optical Fiber Connection</li>
-        <li>IPv6 Public IP Only</li>
+        {isPremium && <li>IPv6 Public IP Only</li>}
         <li>24/7 Phone Support</li>
       </ul>
       

@@ -1195,7 +1195,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-sans); letter-spacing: -0.02em;
    Admin Panel
    ============================================ */
 .admin-login-container {
-  display: flex; justify-content: center; align-items: center; min-height: 80vh; background: #fdfdfd; padding-top: 80px;
+  display: flex; justify-content: center; align-items: center; min-height: 80vh; background: transparent; padding-top: 80px;
 }
 .admin-login-form {
   background: #fff; padding: 40px; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); width: 100%; max-width: 400px; text-align: center;
@@ -1216,3 +1216,10 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-sans); letter-spacing: -0.02em;
 .admin-table th { background: var(--gray-50); color: var(--gray-600); font-weight: 600; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.05em; }
 .admin-table tbody tr:hover { background: #fafafa; }
 .admin-table td { color: var(--gray-700); }
+
+/* Mobile Only */
+@media (max-width: 991px) {
+  .desktop-only {
+    display: none !important;
+  }
+}
