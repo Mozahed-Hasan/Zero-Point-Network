@@ -2,8 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import Image from "next/image";
 
 export default function AdminPage() {
   const router = useRouter();
@@ -46,9 +45,14 @@ export default function AdminPage() {
 
   if (!isLoggedIn) {
     return (
-      <>
-        <Navbar />
-        <div className="admin-login-container">
+      <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%)' }}>
+        <header style={{ padding: '15px 0', background: '#fff', boxShadow: '0 2px 10px rgba(0,0,0,0.05)' }}>
+          <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <Image src="/Main logo.png" alt="ZPN Logo" width={180} height={65} style={{ objectFit: 'contain' }} />
+            <h1 style={{ fontSize: '1.4rem', color: 'var(--gray-900)', margin: 0, fontWeight: 800 }}>এডমিন প্যানেল</h1>
+          </div>
+        </header>
+        <div className="admin-login-container" style={{ minHeight: 'calc(100vh - 72px)', paddingTop: 0 }}>
           <form className="admin-login-form" onSubmit={handleLogin}>
             <h2>এডমিন লগইন</h2>
             <p>ড্যাশবোর্ডে প্রবেশ করতে পাসওয়ার্ড দিন</p>
@@ -65,7 +69,7 @@ export default function AdminPage() {
             </button>
           </form>
         </div>
-      </>
+      </div>
     );
   }
 
@@ -73,14 +77,19 @@ export default function AdminPage() {
   const complaints = submissions.filter(s => s.type === "complaint");
 
   return (
-    <>
-      <Navbar />
-      <div className="admin-dashboard container" style={{paddingTop: "120px", paddingBottom: "80px", minHeight: "80vh"}}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '40px' }}>
-          <h1 className="admin-title" style={{ marginBottom: 0 }}>এডমিন ড্যাশবোর্ড</h1>
-          <button onClick={handleLogout} className="btn btn-primary" style={{ backgroundColor: '#DC2626', borderColor: '#DC2626' }}>লগ আউট</button>
+    <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%)' }}>
+      <header style={{ padding: '15px 0', background: '#fff', boxShadow: '0 2px 10px rgba(0,0,0,0.05)' }}>
+        <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div style={{ flex: 1 }}>
+            <Image src="/Main logo.png" alt="ZPN Logo" width={180} height={65} style={{ objectFit: 'contain' }} />
+          </div>
+          <h1 style={{ flex: 2, textAlign: 'center', fontSize: '1.4rem', color: 'var(--gray-900)', margin: 0, fontWeight: 800 }}>ZPN ড্যাশবোর্ড</h1>
+          <div style={{ flex: 1, textAlign: 'right' }}>
+            <button onClick={handleLogout} className="btn btn-primary" style={{ backgroundColor: '#DC2626', borderColor: '#DC2626', padding: '8px 16px' }}>লগ আউট</button>
+          </div>
         </div>
-        
+      </header>
+      <div className="admin-dashboard container" style={{paddingTop: "40px", paddingBottom: "80px", minHeight: "calc(100vh - 76px)"}}>
         <div className="admin-section">
           <h2>নতুন সংযোগের আবেদন ({connectionReqs.length})</h2>
           <div className="table-responsive">
@@ -147,7 +156,6 @@ export default function AdminPage() {
           </div>
         </div>
       </div>
-      <Footer />
-    </>
+    </div>
   );
 }

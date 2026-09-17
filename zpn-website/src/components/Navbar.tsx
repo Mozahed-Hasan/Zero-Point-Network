@@ -58,17 +58,11 @@ export default function Navbar() {
                   <a
                     href={item.href}
                     className={`nav-link${active === item.href.slice(1) ? " active" : ""}`}
-                    onClick={(e) => {
-                      if (window.innerWidth <= 768) {
-                        e.preventDefault();
-                      } else {
-                        setMenuOpen(false);
-                      }
-                    }}
+                    onClick={() => setMenuOpen(false)}
                   >
-                    {item.label} ▾
+                    {item.label} <span className="desktop-only">▾</span>
                   </a>
-                  <div className="nav-dropdown-content">
+                  <div className="nav-dropdown-content desktop-only">
                     {ftpCategories.map(cat => (
                       <div key={cat.id} className="nav-dropdown-item">
                         {cat.label} <span style={{ fontSize: "0.7rem", marginLeft: "10px" }}>▶</span>

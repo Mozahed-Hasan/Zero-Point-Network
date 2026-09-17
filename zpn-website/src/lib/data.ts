@@ -64,9 +64,9 @@ export const ftpCategories: FTPCategory[] = [
 ];
 
 export const coverageAreas: Area[] = [
-  { id:"khilbari", name:"খিলবাড়িটেক",      active:true },
+  { id:"khilbari", name:"খিলবাড়িরটেক",      active:true },
   { id:"nurer",    name:"নূরেরচালা",         active:true },
-  { id:"bou",      name:"বউবাজার",           active:true },
+  { id:"bou",      name:"বউ বাজার",           active:true },
   { id:"shah",     name:"শাহজাহাদপুর",       active:true },
   { id:"vatara",   name:"বাঁশতলা",            active:true },
   { id:"jblock",   name:"জে-ব্লক",           active:true },

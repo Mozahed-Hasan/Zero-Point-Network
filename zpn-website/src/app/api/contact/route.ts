@@ -58,7 +58,9 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({
       success: true,
-      message: "আপনার আবেদন সফলভাবে গৃহীত হয়েছে! আমরা শীঘ্রই যোগাযোগ করব।",
+      message: isComplaint 
+        ? "আপনার অভিযোগ সফলভাবে গৃহীত হয়েছে! আমরা শীঘ্রই যোগাযোগ করব।"
+        : "আপনার আবেদন সফলভাবে গৃহীত হয়েছে! আমরা শীঘ্রই যোগাযোগ করব।",
     });
   } catch (error) {
     console.error("Database error:", error);

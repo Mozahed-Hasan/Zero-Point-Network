@@ -128,7 +128,7 @@ export default function ContactSection() {
                 <label htmlFor="area">এলাকা *</label>
                 <select id="area" name="area" value={form.area} onChange={handleChange} required>
                   <option value="">এলাকা নির্বাচন করুন</option>
-                  {["খিলবাড়িটেক","নূরেরচালা","বউবাজার","শাহজাহাদপুর","বাঁশতলা","জে-ব্লক","আব্দুল্লাহবাগ","অন্যান্য"].map((a) => (
+                  {["খিলবাড়িরটেক","নূরেরচালা","বউ বাজার","শাহজাহাদপুর","বাঁশতলা","জে-ব্লক","আব্দুল্লাহবাগ","অন্যান্য"].map((a) => (
                     <option key={a} value={a}>{a}</option>
                   ))}
                 </select>
