@@ -779,6 +779,12 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-sans); letter-spacing: -0.02em;
   #nav-call-btn { padding: 10px; }
   .nav-links { display: none; flex-direction: column; position: fixed; top: 90px; left: 0; right: 0; background: var(--white); padding: 20px 24px; border-bottom: 1px solid var(--gray-200); box-shadow: var(--shadow); z-index: 9999; gap: 4px; }
   .nav-links.open { display: flex !important; }
+  .nav-dropdown-content { position: static !important; box-shadow: none !important; border: none !important; background: var(--gray-50) !important; margin-top: 4px; display: none; width: 100%; text-align: center; }
+  .nav-dropdown.active .nav-dropdown-content, .nav-dropdown:hover .nav-dropdown-content { display: block !important; }
+  .nav-sub-dropdown { position: static !important; box-shadow: none !important; border: none !important; background: var(--white) !important; padding-left: 0 !important; width: 100%; text-align: center; }
+  .nav-dropdown-item { flex-wrap: wrap; justify-content: center !important; }
+  .nav-dropdown-item:hover .nav-sub-dropdown { display: block !important; width: 100%; }
+  .nav-sub-item { text-align: center !important; justify-content: center !important; }
   .hamburger { display: flex; position: relative; z-index: 10000; }
   .services-grid, .packages-grid, .packages-grid.family-grid, .packages-grid.premium-grid { grid-template-columns: 1fr 1fr; }
   .contact-links-grid { grid-template-columns: 1fr; }
