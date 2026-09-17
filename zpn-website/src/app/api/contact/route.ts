@@ -1,9 +1,7 @@
 // src/app/api/contact/route.ts  –  Backend API route for contact form
 
 import { NextRequest, NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import { supabase } from "@/lib/supabase";
 
 export interface ContactFormData {
   fullName: string;
@@ -44,17 +42,19 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // Save to DB
-    await prisma.contactSubmission.create({
-      data: {
+    // Save to Supabase
+    const { error } = await supabase
+      .from('contact_submissions')
+      .insert({
         type: isComplaint ? "complaint" : "connection",
-        fullName: fullName || null,
+        full_name: fullName || null,
         phone: phone || null,
         area,
         package: body.packageName || null,
         message: body.message || null,
-      }
-    });
+      });
+
+    if (error) throw error;
 
     return NextResponse.json({
       success: true,
