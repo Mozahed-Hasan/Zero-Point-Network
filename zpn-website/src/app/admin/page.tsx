@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function AdminPage() {
   const router = useRouter();
@@ -48,7 +49,9 @@ export default function AdminPage() {
       <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%)' }}>
         <header style={{ padding: '15px 0', background: '#fff', boxShadow: '0 2px 10px rgba(0,0,0,0.05)' }}>
           <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <Image src="/Main logo.png" alt="ZPN Logo" width={180} height={65} style={{ objectFit: 'contain' }} />
+            <Link href="/">
+              <Image src="/Main logo.png" alt="ZPN Logo" width={180} height={65} style={{ objectFit: 'contain', cursor: 'pointer' }} />
+            </Link>
             <h1 style={{ fontSize: '1.4rem', color: 'var(--gray-900)', margin: 0, fontWeight: 800 }}>এডমিন প্যানেল</h1>
           </div>
         </header>
@@ -81,7 +84,9 @@ export default function AdminPage() {
       <header style={{ padding: '15px 0', background: '#fff', boxShadow: '0 2px 10px rgba(0,0,0,0.05)' }}>
         <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div style={{ flex: 1 }}>
-            <Image src="/Main logo.png" alt="ZPN Logo" width={180} height={65} style={{ objectFit: 'contain' }} />
+            <Link href="/">
+              <Image src="/Main logo.png" alt="ZPN Logo" width={180} height={65} style={{ objectFit: 'contain', cursor: 'pointer' }} />
+            </Link>
           </div>
           <h1 style={{ flex: 2, textAlign: 'center', fontSize: '1.4rem', color: 'var(--gray-900)', margin: 0, fontWeight: 800 }}>ZPN ড্যাশবোর্ড</h1>
           <div style={{ flex: 1, textAlign: 'right' }}>
