@@ -1,7 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import { supabase } from "@/lib/supabase";
 
 export async function POST(req: NextRequest) {
   try {
@@ -17,19 +15,29 @@ export async function POST(req: NextRequest) {
 
     let result;
     if (action === "delete") {
-      result = await prisma.contactSubmission.update({
-        where: { id },
-        data: { isDeleted: true },
-      });
+      const { data, error } = await supabase
+        .from('contact_submissions')
+        .update({ is_deleted: true })
+        .eq('id', id)
+        .select();
+      if (error) throw error;
+      result = data;
     } else if (action === "restore") {
-      result = await prisma.contactSubmission.update({
-        where: { id },
-        data: { isDeleted: false },
-      });
+      const { data, error } = await supabase
+        .from('contact_submissions')
+        .update({ is_deleted: false })
+        .eq('id', id)
+        .select();
+      if (error) throw error;
+      result = data;
     } else if (action === "permanentDelete") {
-      result = await prisma.contactSubmission.delete({
-        where: { id },
-      });
+      const { data, error } = await supabase
+        .from('contact_submissions')
+        .delete()
+        .eq('id', id)
+        .select();
+      if (error) throw error;
+      result = data;
     } else {
       return NextResponse.json({ success: false, message: "Invalid action" }, { status: 400 });
     }
@@ -37,6 +45,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ success: true, submission: result });
   } catch (error) {
     console.error("Admin Action API Error:", error);
-    return NextResponse.json({ success: false, message: "Server error" }, { status: 500 });
+    const errMsg = error instanceof Error ? error.message : String(error);
+    return NextResponse.json({ success: false, message: errMsg }, { status: 500 });
   }
 }
