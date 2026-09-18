@@ -1211,6 +1211,49 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-sans); letter-spacing: -0.02em;
 .admin-table tbody tr:hover { background: #fafafa; }
 .admin-table td { color: var(--gray-700); }
 
+.admin-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+.admin-tab {
+  padding: 10px 20px;
+  border-radius: 8px;
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--gray-600);
+  transition: all 0.3s ease;
+}
+.admin-tab.active {
+  background: var(--red);
+  color: var(--white);
+  border-color: var(--red);
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.2);
+}
+.btn-sm {
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  border-radius: 6px;
+}
+.btn-danger {
+  background: var(--red);
+  color: var(--white);
+  border: 1px solid var(--red);
+}
+.btn-danger:hover {
+  background: #b91c1c;
+}
+.btn-success {
+  background: #10b981;
+  color: var(--white);
+  border: 1px solid #10b981;
+}
+.btn-success:hover {
+  background: #059669;
+}
+
 /* Mobile Only */
 @media (max-width: 991px) {
   .desktop-only {
