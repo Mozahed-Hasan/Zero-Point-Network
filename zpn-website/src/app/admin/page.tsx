@@ -51,7 +51,7 @@ export default function AdminPage() {
       });
       const data = await res.json();
       if (data.success) {
-        if (action === 'permanentDelete') {
+        if (action === 'permanentDelete' || action === 'delete') {
           setSubmissions(prev => prev.filter(s => s.id !== id));
         } else {
           setSubmissions(prev => prev.map(s => s.id === id ? { ...s, isDeleted: action === 'delete' } : s));

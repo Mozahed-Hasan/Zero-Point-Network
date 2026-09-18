@@ -14,10 +14,10 @@ export async function POST(req: NextRequest) {
     }
 
     let result;
-    if (action === "delete") {
+    if (action === "delete" || action === "permanentDelete") {
       const { data, error } = await supabase
         .from('contact_submissions')
-        .update({ is_deleted: true })
+        .delete()
         .eq('id', id)
         .select();
       if (error) throw error;
@@ -30,14 +30,6 @@ export async function POST(req: NextRequest) {
         .select();
       if (error) throw error;
       result = data;
-    } else if (action === "permanentDelete") {
-      const { data, error } = await supabase
-        .from('contact_submissions')
-        .delete()
-        .eq('id', id)
-        .select();
-      if (error) throw error;
-      result = data;
     } else {
       return NextResponse.json({ success: false, message: "Invalid action" }, { status: 400 });
     }
@@ -45,7 +37,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ success: true, submission: result });
   } catch (error) {
     console.error("Admin Action API Error:", error);
-    const errMsg = error instanceof Error ? error.message : String(error);
+    const errMsg = error instanceof Error ? error.message : (error as any).message || JSON.stringify(error);
     return NextResponse.json({ success: false, message: errMsg }, { status: 500 });
   }
 }
