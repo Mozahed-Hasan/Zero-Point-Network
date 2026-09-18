@@ -12,7 +12,7 @@ export default function AdminPage() {
   const [submissions, setSubmissions] = useState<any[]>([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [currentTab, setCurrentTab] = useState("dashboard");
+  const [currentTab, setCurrentTab] = useState("applications");
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -125,10 +125,16 @@ export default function AdminPage() {
       <div className="admin-dashboard container" style={{paddingTop: "40px", paddingBottom: "80px", minHeight: "calc(100vh - 76px)"}}>
         <div className="admin-tabs">
           <button 
-            className={`admin-tab ${currentTab === 'dashboard' ? 'active' : ''}`}
-            onClick={() => setCurrentTab('dashboard')}
+            className={`admin-tab ${currentTab === 'applications' ? 'active' : ''}`}
+            onClick={() => setCurrentTab('applications')}
           >
-            ড্যাশবোর্ড
+            নতুন আবেদন ({connectionReqs.length})
+          </button>
+          <button 
+            className={`admin-tab ${currentTab === 'complaints' ? 'active' : ''}`}
+            onClick={() => setCurrentTab('complaints')}
+          >
+            অভিযোগ সমূহ ({complaints.length})
           </button>
           <button 
             className={`admin-tab ${currentTab === 'recycle' ? 'active' : ''}`}
@@ -138,7 +144,7 @@ export default function AdminPage() {
           </button>
         </div>
 
-        {currentTab === 'dashboard' ? (
+        {currentTab === 'applications' ? (
           <>
             <div className="admin-section">
               <h2>নতুন সংযোগের আবেদন ({connectionReqs.length})</h2>
@@ -175,45 +181,48 @@ export default function AdminPage() {
                   </tbody>
                 </table>
               </div>
-            </div>
-
-            <div className="admin-section" style={{marginTop: '60px'}}>
-              <h2>অভিযোগ সমূহ ({complaints.length})</h2>
-              <div className="table-responsive">
-                <table className="admin-table">
-                  <thead>
-                    <tr>
-                      <th>তারিখ</th>
-                      <th>নাম</th>
-                      <th>ফোন</th>
-                      <th>এলাকা</th>
-                      <th>অভিযোগের ধরন</th>
-                      <th>বিস্তারিত</th>
-                      <th>অ্যাকশন</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {complaints.map(req => (
-                      <tr key={req.id}>
-                        <td>{new Date(req.createdAt || req.created_at).toLocaleString("bn-BD")}</td>
-                        <td>{req.fullName || "-"}</td>
-                        <td>{req.phone || "-"}</td>
-                        <td>{req.area}</td>
-                        <td>{req.package}</td>
-                        <td>{req.message}</td>
-                        <td>
-                          <button className="btn btn-sm btn-danger" onClick={() => handleAction(req.id, 'delete')}>ডিলিট</button>
-                        </td>
-                      </tr>
-                    ))}
-                    {complaints.length === 0 && (
-                      <tr><td colSpan={7} style={{textAlign:'center'}}>কোনো অভিযোগ নেই</td></tr>
-                    )}
                   </tbody>
                 </table>
               </div>
             </div>
           </>
+        ) : currentTab === 'complaints' ? (
+          <div className="admin-section">
+            <h2>অভিযোগ সমূহ ({complaints.length})</h2>
+            <div className="table-responsive">
+              <table className="admin-table">
+                <thead>
+                  <tr>
+                    <th>তারিখ</th>
+                    <th>নাম</th>
+                    <th>ফোন</th>
+                    <th>এলাকা</th>
+                    <th>অভিযোগের ধরন</th>
+                    <th>বিস্তারিত</th>
+                    <th>অ্যাকশন</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {complaints.map(req => (
+                    <tr key={req.id}>
+                      <td>{new Date(req.createdAt || req.created_at).toLocaleString("bn-BD")}</td>
+                      <td>{req.fullName || "-"}</td>
+                      <td>{req.phone || "-"}</td>
+                      <td>{req.area}</td>
+                      <td>{req.package}</td>
+                      <td>{req.message}</td>
+                      <td>
+                        <button className="btn btn-sm btn-danger" onClick={() => handleAction(req.id, 'delete')}>ডিলিট</button>
+                      </td>
+                    </tr>
+                  ))}
+                  {complaints.length === 0 && (
+                    <tr><td colSpan={7} style={{textAlign:'center'}}>কোনো অভিযোগ নেই</td></tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </div>
         ) : (
           <div className="admin-section">
             <h2>রিসাইকেল বিন ({deletedItems.length})</h2>
