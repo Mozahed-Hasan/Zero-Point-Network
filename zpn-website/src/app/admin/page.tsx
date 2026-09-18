@@ -181,9 +181,6 @@ export default function AdminPage() {
                   </tbody>
                 </table>
               </div>
-                  </tbody>
-                </table>
-              </div>
             </div>
           </>
         ) : currentTab === 'complaints' ? (
