@@ -64,22 +64,22 @@ export default function Hero() {
             <div className="slider-track">
               <div className="slide-card">
                 <div className="slide-image-container" style={{ position: 'relative', width: '100%', height: '100%', borderRadius: '12px', overflow: 'hidden' }}>
-                  <Image src="/poster1.png" alt="Poster 1" fill style={{ objectFit: 'cover' }} sizes="(max-width: 800px) 100vw, 800px" priority />
-                </div>
-              </div>
-              <div className="slide-card">
-                <div className="slide-image-container" style={{ position: 'relative', width: '100%', height: '100%', borderRadius: '12px', overflow: 'hidden' }}>
-                  <Image src="/poster3.png" alt="Poster 3" fill style={{ objectFit: 'cover' }} sizes="(max-width: 800px) 100vw, 800px" />
-                </div>
-              </div>
-              <div className="slide-card">
-                <div className="slide-image-container" style={{ position: 'relative', width: '100%', height: '100%', borderRadius: '12px', overflow: 'hidden' }}>
-                  <Image src="/poster2.png" alt="Poster 2" fill style={{ objectFit: 'cover' }} sizes="(max-width: 800px) 100vw, 800px" />
+                  <Image src="/poster2.png" alt="Poster 2" fill style={{ objectFit: 'cover' }} sizes="(max-width: 800px) 100vw, 800px" priority />
                 </div>
               </div>
               <div className="slide-card">
                 <div className="slide-image-container" style={{ position: 'relative', width: '100%', height: '100%', borderRadius: '12px', overflow: 'hidden' }}>
                   <Image src="/poster4.png" alt="Poster 4" fill style={{ objectFit: 'cover' }} sizes="(max-width: 800px) 100vw, 800px" />
+                </div>
+              </div>
+              <div className="slide-card">
+                <div className="slide-image-container" style={{ position: 'relative', width: '100%', height: '100%', borderRadius: '12px', overflow: 'hidden' }}>
+                  <Image src="/Poster.png" alt="Poster 3" fill style={{ objectFit: 'cover' }} sizes="(max-width: 800px) 100vw, 800px" />
+                </div>
+              </div>
+              <div className="slide-card">
+                <div className="slide-image-container" style={{ position: 'relative', width: '100%', height: '100%', borderRadius: '12px', overflow: 'hidden' }}>
+                  <Image src="/poster1.png" alt="Poster 1" fill style={{ objectFit: 'cover' }} sizes="(max-width: 800px) 100vw, 800px" />
                 </div>
               </div>
             </div>

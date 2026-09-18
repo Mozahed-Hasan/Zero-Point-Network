@@ -16,5 +16,6 @@ model ContactSubmission {
   area      String
   package   String?  // package id OR complaint type
   message   String?
+  isDeleted Boolean  @default(false)
   createdAt DateTime @default(now())
 }
