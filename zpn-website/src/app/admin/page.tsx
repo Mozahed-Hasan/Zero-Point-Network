@@ -103,9 +103,9 @@ export default function AdminPage() {
     );
   }
 
-  const connectionReqs = submissions.filter(s => s.type === "connection" && !s.isDeleted);
-  const complaints = submissions.filter(s => s.type === "complaint" && !s.isDeleted);
-  const deletedItems = submissions.filter(s => s.isDeleted);
+  const connectionReqs = submissions.filter(s => s.type === "connection" && !s.isDeleted && !s.is_deleted);
+  const complaints = submissions.filter(s => s.type === "complaint" && !s.isDeleted && !s.is_deleted);
+  const deletedItems = submissions.filter(s => s.isDeleted || s.is_deleted);
 
   return (
     <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%)' }}>
@@ -158,7 +158,7 @@ export default function AdminPage() {
                   <tbody>
                     {connectionReqs.map(req => (
                       <tr key={req.id}>
-                        <td>{new Date(req.createdAt).toLocaleString("bn-BD")}</td>
+                        <td>{new Date(req.createdAt || req.created_at).toLocaleString("bn-BD")}</td>
                         <td>{req.fullName}</td>
                         <td>{req.phone}</td>
                         <td>{req.area}</td>
@@ -195,7 +195,7 @@ export default function AdminPage() {
                   <tbody>
                     {complaints.map(req => (
                       <tr key={req.id}>
-                        <td>{new Date(req.createdAt).toLocaleString("bn-BD")}</td>
+                        <td>{new Date(req.createdAt || req.created_at).toLocaleString("bn-BD")}</td>
                         <td>{req.fullName || "-"}</td>
                         <td>{req.phone || "-"}</td>
                         <td>{req.area}</td>
@@ -232,7 +232,7 @@ export default function AdminPage() {
                 <tbody>
                   {deletedItems.map(req => (
                     <tr key={req.id}>
-                      <td>{new Date(req.createdAt).toLocaleString("bn-BD")}</td>
+                      <td>{new Date(req.createdAt || req.created_at).toLocaleString("bn-BD")}</td>
                       <td>{req.type === 'connection' ? 'সংযোগ' : 'অভিযোগ'}</td>
                       <td>{req.fullName || "-"}<br/><small>{req.phone}</small></td>
                       <td>{req.area}</td>
