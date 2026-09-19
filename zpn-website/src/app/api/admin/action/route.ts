@@ -14,7 +14,15 @@ export async function POST(req: NextRequest) {
     }
 
     let result;
-    if (action === "delete" || action === "permanentDelete") {
+    if (action === "delete") {
+      const { data, error } = await supabase
+        .from('contact_submissions')
+        .update({ is_deleted: true })
+        .eq('id', id)
+        .select();
+      if (error) throw error;
+      result = data;
+    } else if (action === "permanentDelete") {
       const { data, error } = await supabase
         .from('contact_submissions')
         .delete()

@@ -51,10 +51,10 @@ export default function AdminPage() {
       });
       const data = await res.json();
       if (data.success) {
-        if (action === 'permanentDelete' || action === 'delete') {
+        if (action === 'permanentDelete') {
           setSubmissions(prev => prev.filter(s => s.id !== id));
         } else {
-          setSubmissions(prev => prev.map(s => s.id === id ? { ...s, isDeleted: action === 'delete' } : s));
+          setSubmissions(prev => prev.map(s => s.id === id ? { ...s, is_deleted: action === 'delete' } : s));
         }
       } else {
         alert(data.message || "কোনো সমস্যা হয়েছে");
@@ -165,7 +165,7 @@ export default function AdminPage() {
                     {connectionReqs.map(req => (
                       <tr key={req.id}>
                         <td>{new Date(req.createdAt || req.created_at).toLocaleString("bn-BD")}</td>
-                        <td>{req.fullName}</td>
+                        <td>{req.full_name || req.fullName || "-"}</td>
                         <td>{req.phone}</td>
                         <td>{req.area}</td>
                         <td>{req.package}</td>
@@ -203,7 +203,7 @@ export default function AdminPage() {
                   {complaints.map(req => (
                     <tr key={req.id}>
                       <td>{new Date(req.createdAt || req.created_at).toLocaleString("bn-BD")}</td>
-                      <td>{req.fullName || "-"}</td>
+                      <td>{req.full_name || req.fullName || "-"}</td>
                       <td>{req.phone || "-"}</td>
                       <td>{req.area}</td>
                       <td>{req.package}</td>
@@ -240,7 +240,7 @@ export default function AdminPage() {
                     <tr key={req.id}>
                       <td>{new Date(req.createdAt || req.created_at).toLocaleString("bn-BD")}</td>
                       <td>{req.type === 'connection' ? 'সংযোগ' : 'অভিযোগ'}</td>
-                      <td>{req.fullName || "-"}<br/><small>{req.phone}</small></td>
+                      <td>{req.full_name || req.fullName || "-"}<br/><small>{req.phone}</small></td>
                       <td>{req.area}</td>
                       <td>{req.package}</td>
                       <td>
