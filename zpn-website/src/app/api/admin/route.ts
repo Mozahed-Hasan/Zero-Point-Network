@@ -4,7 +4,7 @@ import { supabase } from "@/lib/supabase";
 export async function POST(req: NextRequest) {
   try {
     const { password } = await req.json();
-    if (password !== "singletillnow") {
+    if (password !== "apuzero123") {
       return NextResponse.json({ success: false, message: "Invalid password" }, { status: 401 });
     }
 

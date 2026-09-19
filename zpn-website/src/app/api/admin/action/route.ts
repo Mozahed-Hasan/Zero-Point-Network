@@ -5,7 +5,7 @@ export async function POST(req: NextRequest) {
   try {
     const { id, action, password } = await req.json();
     
-    if (password !== "singletillnow") {
+    if (password !== "apuzero123") {
       return NextResponse.json({ success: false, message: "Invalid password" }, { status: 401 });
     }
 
