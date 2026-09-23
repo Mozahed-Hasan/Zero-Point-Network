@@ -122,7 +122,7 @@ export default function Packages() {
               <Image src="/PUBG_Logo.png" alt="PUBG" width={180} height={180} className="game-logo" />
             </div>
             <p className="gaming-text">
-              eFootball Free Fire PUBG সহ জনপ্রিয় সকল game এ পাচ্ছেন নিশ্চিত low latency তাই গেমিং হবে নিশ্চিন্তে!
+              eFootball ● Free Fire ● PUBG সহ জনপ্রিয় সকল game এ পাচ্ছেন নিশ্চিত low latency তাই গেমিং হবে নিশ্চিন্তে!
             </p>
           </div>
         </div>
